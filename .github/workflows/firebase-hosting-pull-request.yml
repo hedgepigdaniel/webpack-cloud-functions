@@ -13,6 +13,6 @@ jobs:
           entryPoint: hosted-projects/firebase-project
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_DANIEL_PLAYFAIR_CAL }}'
-          projectId: daniel-playfair-cal
+          projectId: dpc-experiments-8302a
         env:
           FIREBASE_CLI_PREVIEWS: hostingchannels
