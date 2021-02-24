@@ -9,8 +9,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: FirebaseExtended/action-hosting-deploy@v0
-        working-directory: hosted-projects/firebase-project
         with:
+          entryPoint: hosted-projects/firebase-project
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_DANIEL_PLAYFAIR_CAL }}'
           projectId: daniel-playfair-cal
