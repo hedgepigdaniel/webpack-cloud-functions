@@ -1,7 +1,7 @@
 {
-  "name": "functions-webpack",
-  "version": "1.0.0",
-  "description": "Experiment to build cloud functions with webpack",
+  "name": "hot-functions-monorepo",
+  "description": "Use webpack with lambda/cloud functions, including hot module reloading",
+  "version": "0.1.0",
   "main": "index.js",
   "license": "MIT",
   "private": true,
