@@ -284,6 +284,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@hedgepigdaniel/webpack-hot-server-middleware@npm:^0.6.1":
+  version: 0.6.1
+  resolution: "@hedgepigdaniel/webpack-hot-server-middleware@npm:0.6.1"
+  dependencies:
+    debug: ^3.1.0
+    require-from-string: ^2.0.1
+    source-map-support: ^0.5.3
+  peerDependencies:
+    "@types/express": ^4.0.0
+    "@types/koa": ^2.0.0
+    "@types/webpack": ^4.0.0
+    webpack: "*"
+  checksum: 0f899a882c14cb85865f9b26397b0c16abb26f2e2531c575ac649119543e7319c27824a30b6cd23f45e37bf896962646085d5203ca2fc04bb96d06c143fee659
+  languageName: node
+  linkType: hard
+
 "@lerna/add@npm:3.21.0":
   version: 3.21.0
   resolution: "@lerna/add@npm:3.21.0"
@@ -4395,7 +4411,7 @@ __metadata:
     firebase-admin: ^9.2.0
     firebase-functions: ^3.11.0
     firebase-functions-test: ^0.2.0
-    hot-functions: ^0.1.0
+    hot-functions: ^0.1.1
   languageName: unknown
   linkType: soft
 
@@ -4409,14 +4425,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"hot-functions@^0.1.0, hot-functions@workspace:libraries/hot-functions":
+"hot-functions@^0.1.1, hot-functions@workspace:libraries/hot-functions":
   version: 0.0.0-use.local
   resolution: "hot-functions@workspace:libraries/hot-functions"
   dependencies:
+    "@hedgepigdaniel/webpack-hot-server-middleware": ^0.6.1
     "@types/koa": ^2.13.0
     memfs: ^3.2.0
     webpack: ^5.24.1
-    webpack-hot-server-middleware: "git://github.com/hedgepigdaniel/webpack-hot-server-middleware.git#types/createHandler"
     webpack-merge: ^5.7.3
   languageName: unknown
   linkType: soft
@@ -8594,22 +8610,6 @@ typescript@~4.1.5:
   version: 4.0.2
   resolution: "webidl-conversions@npm:4.0.2"
   checksum: 75c2ada4262cda41410ec898178f4f2a31419a905415a98a0bd1b93441ce4a2b942bae2d0ac6d637b749b9d3b309be5a49dbc3b06aae9d9e65280554268a2c94
-  languageName: node
-  linkType: hard
-
-"webpack-hot-server-middleware@git://github.com/hedgepigdaniel/webpack-hot-server-middleware.git#types/createHandler":
-  version: 0.6.0
-  resolution: "webpack-hot-server-middleware@git://github.com/hedgepigdaniel/webpack-hot-server-middleware.git#commit=ae7b5b5434f97ba9237b3fd69e44953ffed02d06"
-  dependencies:
-    debug: ^3.1.0
-    require-from-string: ^2.0.1
-    source-map-support: ^0.5.3
-  peerDependencies:
-    "@types/express": ^4.0.0
-    "@types/koa": ^2.0.0
-    "@types/webpack": ^4.0.0
-    webpack: "*"
-  checksum: a60473f6a41eec84efa9f21bb01cfa8414eaac36503d296d2dad88fa7a32e23390878b58a5013c9e6a3c7bbbe8efebad4a0c12e4ef16102939dd931fc3c5dc8a
   languageName: node
   linkType: hard
 

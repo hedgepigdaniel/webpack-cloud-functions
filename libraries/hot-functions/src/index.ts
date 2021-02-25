@@ -4,7 +4,7 @@ import webpack, {
   MultiStats,
   StatsCompilation,
 } from "webpack";
-import { default as webpackHotServerMiddleware } from "webpack-hot-server-middleware";
+import { default as webpackHotServerMiddleware } from "@hedgepigdaniel/webpack-hot-server-middleware";
 import { createFsFromVolume, Volume } from "memfs";
 const { merge } = require("webpack-merge");
 
