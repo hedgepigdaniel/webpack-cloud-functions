@@ -4,9 +4,10 @@
   "useWorkspaces": true,
   "command": {
     "version": {
-      "allowBranch": ["trunk"],
-      "conventionalCommits": true,
-      "createRelease": "github"
+      "allowBranch": [
+        "trunk"
+      ],
+      "conventionalCommits": true
     }
   }
 }
