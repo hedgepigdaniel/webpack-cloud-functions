@@ -1,4 +1,14 @@
 {
   "name": "hot-functions",
-  "main": "dist/index.js"
+  "description": "Use webpack with lambda/cloud functions, including hot module reloading",
+  "version": "0.1.0",
+  "main": "dist/index.js",
+  "types": "types/index.d.ts",
+  "dependencies": {
+    "@types/koa": "^2.13.0",
+    "memfs": "^3.2.0",
+    "webpack": "^5.24.1",
+    "webpack-hot-server-middleware": "git://github.com/hedgepigdaniel/webpack-hot-server-middleware.git#types/createHandler",
+    "webpack-merge": "^5.7.3"
+  }
 }

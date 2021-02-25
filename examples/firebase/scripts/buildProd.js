@@ -1,10 +1,9 @@
 const { buildHandler, makeWebpackConfig } = require("hot-functions");
 
-buildHandler({
-  ...makeWebpackConfig({}),
+buildHandler(makeWebpackConfig({
   mode: "production",
   ...require("../scripts/webpackOptions.js"),
-}).catch((error) => {
+})).catch((error) => {
   console.error(error);
   process.exit(1);
 });

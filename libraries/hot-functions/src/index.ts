@@ -1,21 +1,19 @@
 import webpack, { Configuration, Compiler, MultiStats, StatsCompilation } from "webpack";
 import { default as webpackHotServerMiddleware} from "webpack-hot-server-middleware";
 import { createFsFromVolume, Volume } from 'memfs';
+const { merge } = require("webpack-merge");
 
 
 export type HotWebpackOptions = {
   nodeVersion: number,
 };
 
-export const makeWebpackConfig = ({
-  nodeVersion = 12,
-}: HotWebpackOptions): Configuration => ({
+export const makeWebpackConfig = (baseConfig: Configuration = {}): Configuration => merge({
   name: "server",
-  target: `node${nodeVersion}`,
   output: {
     libraryTarget: 'commonjs2',
   },
-});
+}, baseConfig);
 
 export type HotHandlers<Handlers> = {
   getHandler: <Key extends keyof Handlers>(key: Key) => Handlers[Key];

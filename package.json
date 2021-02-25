@@ -9,18 +9,12 @@
     "prettify": "prettier --write ."
   },
   "workspaces": [
-    "hosted-projects/*",
-    "hosted-projects/firebase-project/functions",
+    "examples/*",
+    "examples/firebase/functions",
     "libraries/*"
   ],
   "devDependencies": {
-    "@babel/core": "^7.13.1",
-    "@babel/preset-env": "^7.13.5",
-    "@babel/preset-typescript": "^7.13.0",
     "prettier": "^2.2.1",
     "typescript": "~4.1.5"
-  },
-  "dependencies": {
-    "@types/koa": "^2.13.0"
   }
 }

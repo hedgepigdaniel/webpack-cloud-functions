@@ -14,14 +14,9 @@
   },
   "main": "index.js",
   "dependencies": {
-    "babel-loader": "^8.2.2",
     "firebase-admin": "^9.2.0",
     "firebase-functions": "^3.11.0",
-    "memfs": "^3.2.0",
-    "source-map-support": "^0.5.19",
-    "webpack": "^5.24.1",
-    "webpack-cli": "^4.5.0",
-    "webpack-hot-server-middleware": "git://github.com/hedgepigdaniel/webpack-hot-server-middleware.git#types/createHandler"
+    "hot-functions": "^0.1.0"
   },
   "devDependencies": {
     "firebase-functions-test": "^0.2.0"
