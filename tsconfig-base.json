@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "ES5",
+    "composite": true,
+    "strict": true,
+
+    "noEmit": true,
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true,
+    "incremental": true,
+
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+
+    "moduleResolution": "node",
+  },
+  "include": []
+}
