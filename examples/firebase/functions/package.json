@@ -1,7 +1,7 @@
 {
   "name": "hot-functions-example-firebase-built",
   "description": "Built version of Firebase example",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "scripts": {
     "serve": "firebase emulators:start --only functions",
     "shell": "firebase functions:shell",
