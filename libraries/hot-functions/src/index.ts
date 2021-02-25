@@ -1,80 +1,92 @@
-import webpack, { Configuration, Compiler, MultiStats, StatsCompilation } from "webpack";
-import { default as webpackHotServerMiddleware} from "webpack-hot-server-middleware";
-import { createFsFromVolume, Volume } from 'memfs';
+import webpack, {
+  Configuration,
+  Compiler,
+  MultiStats,
+  StatsCompilation,
+} from "webpack";
+import { default as webpackHotServerMiddleware } from "webpack-hot-server-middleware";
+import { createFsFromVolume, Volume } from "memfs";
 const { merge } = require("webpack-merge");
 
-
 export type HotWebpackOptions = {
-  nodeVersion: number,
+  nodeVersion: number;
 };
 
-export const makeWebpackConfig = (baseConfig: Configuration = {}): Configuration => merge({
-  name: "server",
-  output: {
-    libraryTarget: 'commonjs2',
-  },
-}, baseConfig);
+export const makeWebpackConfig = (
+  baseConfig: Configuration = {}
+): Configuration =>
+  merge(
+    {
+      name: "server",
+      output: {
+        libraryTarget: "commonjs2",
+      },
+    },
+    baseConfig
+  );
 
 export type HotHandlers<Handlers> = {
   getHandler: <Key extends keyof Handlers>(key: Key) => Handlers[Key];
   getProperty: <Key extends keyof Handlers>(key: Key) => Handlers[Key];
-}
+};
 
 type Invocation<Handlers> = {
-  key: keyof Handlers, 
-  args: unknown[],
+  key: keyof Handlers;
+  args: unknown[];
   resolve: (value: unknown) => void;
   reject: (error: Error) => void;
-}
+};
 
 const handleInvocation = <Handlers>(
   invocation: Invocation<Handlers>,
   getHandlers: () => Handlers,
   compilationErr: Error | undefined,
-  compilationStats: MultiStats | undefined,
+  compilationStats: MultiStats | undefined
 ): void => {
-  if (compilationErr || compilationStats?.hasErrors() ||
-      compilationStats?.stats.find((stats) => stats.hasErrors())
-    ) {
+  if (
+    compilationErr ||
+    compilationStats?.hasErrors() ||
+    compilationStats?.stats.find((stats) => stats.hasErrors())
+  ) {
     invocation.reject(new Error("webpack compilation failed"));
     return;
   }
 
   const handler = getHandlers()[invocation.key];
   if (typeof handler !== "function") {
-    invocation.reject(new Error(`cannot find a handler named ${invocation.key}`));
+    invocation.reject(
+      new Error(`cannot find a handler named ${invocation.key}`)
+    );
     return;
   }
   invocation.resolve(handler(...invocation.args));
-
-}
+};
 
 type CompilationStateSuccess = {
-  type: "SUCCESS",
-  stats: MultiStats,
-  err: undefined,
-  queuedInvocations: [],
-}
+  type: "SUCCESS";
+  stats: MultiStats;
+  err: undefined;
+  queuedInvocations: [];
+};
 
 type CompilationStateFailed = {
-  type: "FAILED",
-  stats: undefined,
-  err: Error,
-  queuedInvocations: [],
-}
+  type: "FAILED";
+  stats: undefined;
+  err: Error;
+  queuedInvocations: [];
+};
 
 type CompilationStatePending<Handlers> = {
-  type: "PENDING",
-  stats: undefined,
-  err: undefined,
-  queuedInvocations: Invocation<Handlers>[],
-}
+  type: "PENDING";
+  stats: undefined;
+  err: undefined;
+  queuedInvocations: Invocation<Handlers>[];
+};
 
 type CompilationState<Handlers> =
   | CompilationStateFailed
   | CompilationStateSuccess
-  | CompilationStatePending<Handlers>
-;
+  | CompilationStatePending<Handlers>;
 
 export const statsOptions: Configuration["stats"] = {
   all: false,
@@ -85,12 +97,16 @@ export const statsOptions: Configuration["stats"] = {
 
 /**
  * Get a set of hot updating handlers from a webpack compilation
- * @param config 
+ * @param config
  */
-export const makeHotHandlers = <Handlers>(config: Configuration): HotHandlers<Handlers> => {
+export const makeHotHandlers = <Handlers>(
+  config: Configuration
+): HotHandlers<Handlers> => {
   const compiler = webpack([config]);
-  compiler.compilers[0].outputFileSystem = createFsFromVolume(new Volume()) as Compiler["outputFileSystem"];
-  
+  compiler.compilers[0].outputFileSystem = createFsFromVolume(
+    new Volume()
+  ) as Compiler["outputFileSystem"];
+
   const getHandlers = webpackHotServerMiddleware(compiler, {
     createHandler: (error, serverRenderer: () => Handlers) => () => {
       if (error) {
@@ -107,8 +123,7 @@ export const makeHotHandlers = <Handlers>(config: Configuration): HotHandlers<Ha
     queuedInvocations: [],
   };
 
-
-  compiler.hooks.invalid.tap('hot-functions', () => {
+  compiler.hooks.invalid.tap("hot-functions", () => {
     console.log("Recompiling...");
     compilationState = {
       type: "PENDING",
@@ -160,45 +175,54 @@ export const makeHotHandlers = <Handlers>(config: Configuration): HotHandlers<Ha
   });
 
   return {
-    getHandler: (key) => ((...args: unknown[]): Promise<unknown> => new Promise((resolve, reject) => {
-      const invocation: Invocation<Handlers> = {
-        resolve,
-        reject,
-        key,
-        args,
-      }
-      if (compilationState.type !== "PENDING") {
-        handleInvocation(invocation, getHandlers, compilationState.err, compilationState.stats);
-      } else {
-        compilationState.queuedInvocations.push(invocation);
-      }
-    })) as unknown as Handlers[typeof key], 
+    getHandler: (key) =>
+      (((...args: unknown[]): Promise<unknown> =>
+        new Promise((resolve, reject) => {
+          const invocation: Invocation<Handlers> = {
+            resolve,
+            reject,
+            key,
+            args,
+          };
+          if (compilationState.type !== "PENDING") {
+            handleInvocation(
+              invocation,
+              getHandlers,
+              compilationState.err,
+              compilationState.stats
+            );
+          } else {
+            compilationState.queuedInvocations.push(invocation);
+          }
+        })) as unknown) as Handlers[typeof key],
     getProperty: (key) => getHandlers()[key],
-  }
+  };
 };
 
 /**
  * Make a handler from a prebuilt module
- * @param module 
+ * @param module
  */
-export const makeStaticHandlers = <Handlers>(getModule: () => Handlers): HotHandlers<Handlers> => {
+export const makeStaticHandlers = <Handlers>(
+  getModule: () => Handlers
+): HotHandlers<Handlers> => {
   const module = getModule();
   return {
     getHandler: (key) => module[key],
     getProperty: (key) => module[key],
-  }
+  };
 };
 
 /**
  * Build a static handler
- * @param env 
+ * @param env
  */
 export const buildHandler = async (config: Configuration): Promise<void> => {
   const compiler = webpack(config);
   compiler.run((err, stats) => {
     if (err) {
       console.error(err.stack || err);
-      if ('details' in err) {
+      if ("details" in err) {
         console.error((err as Error & { details: string }).details);
       }
       throw err;
