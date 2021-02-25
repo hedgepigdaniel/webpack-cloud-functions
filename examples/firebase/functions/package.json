@@ -1,6 +1,7 @@
 {
-  "name": "functions",
-  "description": "Cloud Functions for Firebase",
+  "name": "hot-functions-example-firebase-built",
+  "description": "Built version of Firebase example",
+  "version": "0.1.0",
   "scripts": {
     "serve": "firebase emulators:start --only functions",
     "shell": "firebase functions:shell",

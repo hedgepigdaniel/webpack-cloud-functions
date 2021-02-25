@@ -1,5 +1,7 @@
 {
-  "name": "firebase-project",
+  "name": "hot-functions-example-firebase",
+  "description": "hot-functions example for Google Cloud Functions via Firebase",
+  "version": "0.1.0",
   "scripts": {
     "serve": "firebase emulators:start",
     "shell": "firebase functions:shell",

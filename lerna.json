@@ -1,0 +1,12 @@
+{
+  "version": "0.1.0",
+  "npmClient": "yarn",
+  "useWorkspaces": true,
+  "command": {
+    "version": {
+      "allowBranch": ["trunk"],
+      "conventionalCommits": true,
+      "createRelease": "github"
+    }
+  }
+}
