@@ -8,7 +8,7 @@
   "homepage": "https://github.com/hedgepigdaniel/webpack-cloud-functions/",
   "author": "Daniel Playfair Cal <daniel.playfair.cal@gmail.com>",
   "license": "MIT",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "main": "dist/index.js",
   "types": "types/index.d.ts",
   "scripts": {

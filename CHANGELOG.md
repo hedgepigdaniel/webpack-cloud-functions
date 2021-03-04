@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.4](https://github.com/hedgepigdaniel/webpack-cloud-functions/compare/v0.1.3...v0.1.4) (2021-03-04)
+
+
+### Bug Fixes
+
+* **webpack-cloud-functions-example-firebase:** add dependency on webpack-cloud-functions ([e2e28ad](https://github.com/hedgepigdaniel/webpack-cloud-functions/commit/e2e28ad2d6054b7d62e227c9441c8127cc84567c))
+
+
+
+
+
 ## [0.1.3](https://github.com/hedgepigdaniel/webpack-cloud-functions/compare/v0.1.2...v0.1.3) (2021-03-04)
 
 **Note:** Version bump only for package webpack-cloud-functions-monorepo
