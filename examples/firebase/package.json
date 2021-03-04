@@ -1,6 +1,6 @@
 {
-  "name": "hot-functions-example-firebase",
-  "description": "hot-functions example for Google Cloud Functions via Firebase",
+  "name": "webpack-cloud-functions-example-firebase",
+  "description": "webpack-cloud-functions example for Google Cloud Functions via Firebase",
   "version": "0.1.1",
   "scripts": {
     "serve": "firebase emulators:start",
@@ -18,7 +18,7 @@
   "dependencies": {
     "firebase-admin": "^9.2.0",
     "firebase-functions": "^3.11.0",
-    "hot-functions": "^0.1.1"
+    "webpack-cloud-functions": "^0.1.1"
   },
   "devDependencies": {
     "firebase-functions-test": "^0.2.0"

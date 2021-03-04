@@ -1,5 +1,5 @@
 {
-  "name": "hot-functions-monorepo",
+  "name": "webpack-cloud-functions-monorepo",
   "description": "Use webpack with lambda/cloud functions, including hot module reloading",
   "version": "0.1.0",
   "main": "index.js",

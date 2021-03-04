@@ -123,7 +123,7 @@ export const makeHotHandlers = <Handlers>(
     queuedInvocations: [],
   };
 
-  compiler.hooks.invalid.tap("hot-functions", () => {
+  compiler.hooks.invalid.tap("webpack-cloud-functions", () => {
     console.log("Recompiling...");
     compilationState = {
       type: "PENDING",

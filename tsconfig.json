@@ -1,4 +1,4 @@
 {
   "extends": "./tsconfig-base.json",
-  "references": [{ "path": "./libraries/hot-functions" }]
+  "references": [{ "path": "./libraries/webpack-cloud-functions" }]
 }

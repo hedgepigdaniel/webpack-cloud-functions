@@ -1,4 +1,4 @@
-const { buildHandler, makeWebpackConfig } = require("hot-functions");
+const { buildHandler, makeWebpackConfig } = require("webpack-cloud-functions");
 
 buildHandler(
   makeWebpackConfig({

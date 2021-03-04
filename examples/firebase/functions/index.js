@@ -3,7 +3,7 @@ const {
   makeStaticHandlers,
   makeHotHandlers,
   makeWebpackConfig,
-} = require("hot-functions");
+} = require("webpack-cloud-functions");
 const path = require("path");
 
 let hotHandlers;

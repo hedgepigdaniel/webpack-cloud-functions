@@ -4394,49 +4394,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"hot-functions-example-firebase-built@workspace:examples/firebase/functions":
-  version: 0.0.0-use.local
-  resolution: "hot-functions-example-firebase-built@workspace:examples/firebase/functions"
-  dependencies:
-    firebase-admin: ^9.2.0
-    firebase-functions: ^3.11.0
-    firebase-functions-test: ^0.2.0
-  languageName: unknown
-  linkType: soft
-
-"hot-functions-example-firebase@workspace:examples/firebase":
-  version: 0.0.0-use.local
-  resolution: "hot-functions-example-firebase@workspace:examples/firebase"
-  dependencies:
-    firebase-admin: ^9.2.0
-    firebase-functions: ^3.11.0
-    firebase-functions-test: ^0.2.0
-    hot-functions: ^0.1.1
-  languageName: unknown
-  linkType: soft
-
-"hot-functions-monorepo@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "hot-functions-monorepo@workspace:."
-  dependencies:
-    lerna: ^3.22.1
-    prettier: ^2.2.1
-    typescript: ~4.1.5
-  languageName: unknown
-  linkType: soft
-
-"hot-functions@^0.1.1, hot-functions@workspace:libraries/hot-functions":
-  version: 0.0.0-use.local
-  resolution: "hot-functions@workspace:libraries/hot-functions"
-  dependencies:
-    "@hedgepigdaniel/webpack-hot-server-middleware": ^0.6.1
-    "@types/koa": ^2.13.0
-    memfs: ^3.2.0
-    webpack: ^5.24.1
-    webpack-merge: ^5.7.3
-  languageName: unknown
-  linkType: soft
-
 "http-cache-semantics@npm:^3.8.1":
   version: 3.8.1
   resolution: "http-cache-semantics@npm:3.8.1"
@@ -8612,6 +8569,49 @@ typescript@~4.1.5:
   checksum: 75c2ada4262cda41410ec898178f4f2a31419a905415a98a0bd1b93441ce4a2b942bae2d0ac6d637b749b9d3b309be5a49dbc3b06aae9d9e65280554268a2c94
   languageName: node
   linkType: hard
+
+"webpack-cloud-functions-example-firebase-built@workspace:examples/firebase/functions":
+  version: 0.0.0-use.local
+  resolution: "webpack-cloud-functions-example-firebase-built@workspace:examples/firebase/functions"
+  dependencies:
+    firebase-admin: ^9.2.0
+    firebase-functions: ^3.11.0
+    firebase-functions-test: ^0.2.0
+  languageName: unknown
+  linkType: soft
+
+"webpack-cloud-functions-example-firebase@workspace:examples/firebase":
+  version: 0.0.0-use.local
+  resolution: "webpack-cloud-functions-example-firebase@workspace:examples/firebase"
+  dependencies:
+    firebase-admin: ^9.2.0
+    firebase-functions: ^3.11.0
+    firebase-functions-test: ^0.2.0
+    webpack-cloud-functions: ^0.1.1
+  languageName: unknown
+  linkType: soft
+
+"webpack-cloud-functions-monorepo@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "webpack-cloud-functions-monorepo@workspace:."
+  dependencies:
+    lerna: ^3.22.1
+    prettier: ^2.2.1
+    typescript: ~4.1.5
+  languageName: unknown
+  linkType: soft
+
+"webpack-cloud-functions@^0.1.1, webpack-cloud-functions@workspace:libraries/webpack-cloud-functions":
+  version: 0.0.0-use.local
+  resolution: "webpack-cloud-functions@workspace:libraries/webpack-cloud-functions"
+  dependencies:
+    "@hedgepigdaniel/webpack-hot-server-middleware": ^0.6.1
+    "@types/koa": ^2.13.0
+    memfs: ^3.2.0
+    webpack: ^5.24.1
+    webpack-merge: ^5.7.3
+  languageName: unknown
+  linkType: soft
 
 "webpack-merge@npm:^5.7.3":
   version: 5.7.3
