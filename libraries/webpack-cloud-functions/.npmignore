@@ -1,0 +1,9 @@
+# Ignore Everything
+*
+# But still traverse directories
+!*/
+
+# But include:
+!/package.json
+!/dist/
+**/*.tsbuildinfo
