@@ -5,5 +5,5 @@
 
 # But include:
 !/package.json
-!/dist/
+!/dist/**/*
 **/*.tsbuildinfo

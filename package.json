@@ -6,7 +6,8 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "prettify": "prettier --write ."
+    "prettify": "prettier --write .",
+    "w:tsc": "cd $INIT_CWD && tsc"
   },
   "workspaces": [
     "examples/*",

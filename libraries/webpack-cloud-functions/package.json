@@ -4,6 +4,9 @@
   "version": "0.1.2",
   "main": "dist/index.js",
   "types": "types/index.d.ts",
+  "scripts": {
+    "prepare": "yarn run w:tsc -b"
+  },
   "dependencies": {
     "@hedgepigdaniel/webpack-hot-server-middleware": "^0.6.1",
     "@types/koa": "^2.13.0",
