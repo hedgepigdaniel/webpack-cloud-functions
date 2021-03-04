@@ -1,7 +1,7 @@
 {
   "name": "webpack-cloud-functions",
   "description": "Use webpack with lambda/cloud functions, including hot module reloading",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "main": "dist/index.js",
   "types": "types/index.d.ts",
   "dependencies": {
