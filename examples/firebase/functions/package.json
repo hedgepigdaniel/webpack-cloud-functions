@@ -1,7 +1,7 @@
 {
   "name": "webpack-cloud-functions-example-firebase-built",
   "description": "Built version of Firebase example",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "scripts": {
     "serve": "firebase emulators:start --only functions",
     "shell": "firebase functions:shell",
@@ -16,7 +16,7 @@
   "dependencies": {
     "firebase-admin": "^9.2.0",
     "firebase-functions": "^3.11.0",
-    "webpack-cloud-functions": "^0.1.4"
+    "webpack-cloud-functions": "^0.1.5"
   },
   "devDependencies": {
     "firebase-functions-test": "^0.2.0"
