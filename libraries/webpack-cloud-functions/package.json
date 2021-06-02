@@ -10,7 +10,7 @@
   "license": "MIT",
   "version": "0.1.4",
   "main": "dist/index.js",
-  "types": "types/index.d.ts",
+  "types": "dist/index.d.ts",
   "scripts": {
     "prepare": "yarn run w:tsc -b"
   },
