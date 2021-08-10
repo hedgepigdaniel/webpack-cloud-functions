@@ -3,7 +3,8 @@
   "description": "Use webpack with lambda/cloud functions, including hot module reloading",
   "repository": {
     "type": "git",
-    "url": "https://github.com/hedgepigdaniel/webpack-cloud-functions/tree/trunk/packages/webpack-cloud-functions"
+    "url": "https://github.com/hedgepigdaniel/webpack-cloud-functions.git",
+    "directory": "packages/webpack-cloud-functions"
   },
   "homepage": "https://github.com/hedgepigdaniel/webpack-cloud-functions/",
   "author": "Daniel Playfair Cal <daniel.playfair.cal@gmail.com>",
