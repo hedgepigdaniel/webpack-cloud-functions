@@ -12,3 +12,6 @@
 
 **/dist/**
 .yarn/
+
+CHANGELOG.md
+**/CHANGELOG.md
