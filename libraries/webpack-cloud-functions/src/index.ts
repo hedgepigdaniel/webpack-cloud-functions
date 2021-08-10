@@ -99,7 +99,7 @@ export const statsOptions: Configuration["stats"] = {
 const makeProxy = <Handlers extends Record<string, unknown>>(
   getHandlers: () => Handlers
 ): Handlers =>
-  (new Proxy(getHandlers(), {
+  (new Proxy({}, {
     get(target, property) {
       return getHandlers()[property as keyof Handlers];
     },
