@@ -5,13 +5,15 @@ Use webpack to build your cloud functions and get better DX, faster deploys, and
 ## Features
 
 ### Developer experience
- - Full access to webpack ecosystem of loaders, plugins, etc
- - Built in support for hot module reloading (HMR): change your code and the local emulator will update immediately without restarting
- - Faster deploys as a result of fewer dependencies in the released function
- - Written in Typescript
+
+- Full access to webpack ecosystem of loaders, plugins, etc
+- Built in support for hot module reloading (HMR): change your code and the local emulator will update immediately without restarting
+- Faster deploys as a result of fewer dependencies in the released function
+- Written in Typescript
 
 ### Production optimization
- - Better start up time and memory usage as a result of webpack optimizations and bundling of dependencies. 2-100 JS files used at runtime instead of 50,000+.
+
+- Better start up time and memory usage as a result of webpack optimizations and bundling of dependencies. 2-100 JS files used at runtime instead of 50,000+.
 
 ## Getting started
 
@@ -22,6 +24,7 @@ These steps work for Firebase functions, but could probably be easily adapted fo
 Start a function project according to the documentation for your provider (Google Cloud Functions. Lambda, etc). If there is an option, it's easiest to choose plain javascript.
 
 Note that you will need two `package.json`: one for the functions runtime (the one that is deployed), and another for your project (including dependencies that webpack will bundle). e.g.
+
 ```
 package.json # This tracks your project's dependencies for webpack to build
 functions/
@@ -31,8 +34,10 @@ functions/
 Add `webpack-cloud-functions` as a dependency to **both** `package.json`s
 
 ### Create a function
+
 Create some code (to be compiled by webpack) that contains handlers for functions:
-``` javascript
+
+```javascript
 // src/index.js
 
 import * as functions from "firebase-functions";
@@ -82,7 +87,6 @@ if (process.env.NODE_ENV === "production") {
   );
 }
 
-
 // An example https function. It wraps the `helloWorldHandler` exported from `src/index.js`
 exports.helloWorld = functions.https.onRequest(
   hotHandlers.getHandler("helloWorldHandler")
@@ -92,6 +96,7 @@ exports.helloWorld = functions.https.onRequest(
 It should now be possible to run the local functions emulator, and the functions should update seamlessly as you change the code.
 
 ### Add a script to build the production bundle
+
 ```javascript
 // scripts/buildProd.js
 const { buildHandler, makeWebpackConfig } = require("webpack-cloud-functions");
@@ -117,20 +122,20 @@ buildHandler(
 
 Now if you run `node scripts/buildProd.js`, `functions/main.js` should exist, and it should be possible to deploy the cloud functions!
 
-
 ## Examples
 
 See [examples/firebase](https://github.com/hedgepigdaniel/webpack-cloud-functions/tree/trunk/examples/firebase) for a working example using Firebase Functions.
 
 ## Compatibility
 
-| AWS Lambda | Google Cloud Functions | Firebase Functions | Azure Functions | Netlify Functions |
-| -- | -- | -- | -- | -- |
-| :grey_question: | :grey_question: | :heavy_check_mark: | :grey_question: | :grey_question: |
-
+| AWS Lambda      | Google Cloud Functions | Firebase Functions | Azure Functions | Netlify Functions |
+| --------------- | ---------------------- | ------------------ | --------------- | ----------------- |
+| :grey_question: | :grey_question:        | :heavy_check_mark: | :grey_question: | :grey_question:   |
 
 ## Warranty
+
 None
 
 ## Contributions
+
 Are very welcome, feel free to open a Issue or PR!
