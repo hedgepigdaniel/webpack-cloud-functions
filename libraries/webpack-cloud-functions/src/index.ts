@@ -28,6 +28,7 @@ export const makeWebpackConfig = (
 export type HotHandlers<Handlers> = {
   getHandler: <Key extends keyof Handlers>(key: Key) => Handlers[Key];
   getProperty: <Key extends keyof Handlers>(key: Key) => Handlers[Key];
+  proxy: Handlers;
 };
 
 type Invocation<Handlers> = {
@@ -95,11 +96,25 @@ export const statsOptions: Configuration["stats"] = {
   timings: true,
 };
 
+const makeProxy = <Handlers extends Record<string, unknown>>(
+  getHandlers: () => Handlers
+): Handlers =>
+  (new Proxy(getHandlers(), {
+    get(target, property) {
+      return getHandlers()[property as keyof Handlers];
+    },
+    set() {
+      throw new Error("You cannot assign to a webpack-cloud-functions proxy");
+    },
+  }) as unknown) as Handlers;
+
 /**
  * Get a set of hot updating handlers from a webpack compilation
  * @param config
  */
-export const makeHotHandlers = <Handlers>(
+export const makeHotHandlers = <
+  Handlers extends Record<string | number | symbol, unknown>
+>(
   config: Configuration
 ): HotHandlers<Handlers> => {
   const compiler = webpack([config]);
@@ -196,6 +211,7 @@ export const makeHotHandlers = <Handlers>(
           }
         })) as unknown) as Handlers[typeof key],
     getProperty: (key) => getHandlers()[key],
+    proxy: makeProxy(getHandlers),
   };
 };
 
@@ -203,13 +219,16 @@ export const makeHotHandlers = <Handlers>(
  * Make a handler from a prebuilt module
  * @param module
  */
-export const makeStaticHandlers = <Handlers>(
+export const makeStaticHandlers = <
+  Handlers extends Record<string | number | symbol, unknown>
+>(
   getModule: () => Handlers
 ): HotHandlers<Handlers> => {
   const module = getModule();
   return {
     getHandler: (key) => module[key],
     getProperty: (key) => module[key],
+    proxy: makeProxy(() => module),
   };
 };
 
