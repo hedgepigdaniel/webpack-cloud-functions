@@ -6,7 +6,7 @@ import webpack, {
 } from "webpack";
 import { default as webpackHotServerMiddleware } from "@hedgepigdaniel/webpack-hot-server-middleware";
 import { createFsFromVolume, Volume } from "memfs";
-import path from 'path';
+import path from "path";
 import { merge } from "webpack-merge";
 
 export type HotWebpackOptions = {
@@ -100,14 +100,17 @@ export const statsOptions: Configuration["stats"] = {
 const makeProxy = <Handlers extends Record<string, unknown>>(
   getHandlers: () => Handlers
 ): Handlers =>
-  (new Proxy({}, {
-    get(target, property) {
-      return getHandlers()[property as keyof Handlers];
-    },
-    set() {
-      throw new Error("You cannot assign to a webpack-cloud-functions proxy");
-    },
-  }) as unknown) as Handlers;
+  (new Proxy(
+    {},
+    {
+      get(target, property) {
+        return getHandlers()[property as keyof Handlers];
+      },
+      set() {
+        throw new Error("You cannot assign to a webpack-cloud-functions proxy");
+      },
+    }
+  ) as unknown) as Handlers;
 
 /**
  * Get a set of hot updating handlers from a webpack compilation
