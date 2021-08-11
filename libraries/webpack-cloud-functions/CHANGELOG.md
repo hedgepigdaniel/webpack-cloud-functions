@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.1](https://github.com/hedgepigdaniel/webpack-cloud-functions/compare/v0.2.0...v0.2.1) (2021-08-11)
+
+
+### Bug Fixes
+
+* monkey patch fs.join for webpack 4 ([2b1b5c0](https://github.com/hedgepigdaniel/webpack-cloud-functions/commit/2b1b5c016708e08f401c7f2560b5ca856b1bc947))
+
+
+
+
+
 # [0.2.0](https://github.com/hedgepigdaniel/webpack-cloud-functions/compare/v0.1.5...v0.2.0) (2021-08-10)
 
 
