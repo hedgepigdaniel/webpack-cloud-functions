@@ -6,7 +6,8 @@ import webpack, {
 } from "webpack";
 import { default as webpackHotServerMiddleware } from "@hedgepigdaniel/webpack-hot-server-middleware";
 import { createFsFromVolume, Volume } from "memfs";
-const { merge } = require("webpack-merge");
+import path from 'path';
+import { merge } from "webpack-merge";
 
 export type HotWebpackOptions = {
   nodeVersion: number;
@@ -121,6 +122,9 @@ export const makeHotHandlers = <
   compiler.compilers[0].outputFileSystem = createFsFromVolume(
     new Volume()
   ) as Compiler["outputFileSystem"];
+
+  // Monkey patch for webpack 4 compatibility
+  compiler.compilers[0].outputFileSystem.join = path.join.bind(path);
 
   const getHandlers = webpackHotServerMiddleware(compiler, {
     createHandler: (error, serverRenderer: () => Handlers) => () => {
