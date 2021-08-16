@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.3.0](https://github.com/hedgepigdaniel/webpack-cloud-functions/compare/v0.2.1...v0.3.0) (2021-08-16)
+
+
+### Features
+
+* allow customizing callbacks for compilation invalidate/complete ([b9c56ac](https://github.com/hedgepigdaniel/webpack-cloud-functions/commit/b9c56ac5b41b217645c22b4d2440a48b7d7cde05))
+
+
+
+
+
 ## [0.2.1](https://github.com/hedgepigdaniel/webpack-cloud-functions/compare/v0.2.0...v0.2.1) (2021-08-11)
 
 
