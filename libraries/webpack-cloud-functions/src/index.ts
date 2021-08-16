@@ -2,6 +2,7 @@ import webpack, {
   Configuration,
   Compiler,
   MultiStats,
+  Stats,
   StatsCompilation,
 } from "webpack";
 import { default as webpackHotServerMiddleware } from "@hedgepigdaniel/webpack-hot-server-middleware";
@@ -9,8 +10,13 @@ import { createFsFromVolume, Volume } from "memfs";
 import path from "path";
 import { merge } from "webpack-merge";
 
-export type HotWebpackOptions = {
-  nodeVersion: number;
+export type HotOptions = {
+  onInvalidate: () => void;
+  onComplete: (err?: Error, stats?: MultiStats) => void;
+};
+
+export type BuildOptions = {
+  onComplete: (err?: Error, stats?: Stats) => void;
 };
 
 export const makeWebpackConfig = (
@@ -112,6 +118,34 @@ const makeProxy = <Handlers extends Record<string, unknown>>(
     }
   ) as unknown) as Handlers;
 
+export const defaultHotOnComplete: HotOptions["onComplete"] = (err, stats) => {
+  if (err) {
+    console.error(err);
+  } else if (stats) {
+    const info = stats.toJson(statsOptions);
+
+    // We know there is one child compilation
+    console.log(
+      `Compilation complete after ${
+        (info.children as [StatsCompilation])[0].time
+      }ms.`
+    );
+    info.warnings?.forEach((warning) => {
+      console.warn(warning);
+    });
+    info.errors?.forEach((error) => {
+      console.error(error);
+    });
+  }
+};
+
+const defaultHotOptions: HotOptions = {
+  onInvalidate: () => {
+    console.log("Recompiling...");
+  },
+  onComplete: defaultHotOnComplete,
+};
+
 /**
  * Get a set of hot updating handlers from a webpack compilation
  * @param config
@@ -119,8 +153,13 @@ const makeProxy = <Handlers extends Record<string, unknown>>(
 export const makeHotHandlers = <
   Handlers extends Record<string | number | symbol, unknown>
 >(
-  config: Configuration
+  config: Configuration,
+  options?: Partial<HotOptions>
 ): HotHandlers<Handlers> => {
+  const effectiveOptions: HotOptions = {
+    ...defaultHotOptions,
+    ...options,
+  };
   const compiler = webpack([config]);
   compiler.compilers[0].outputFileSystem = createFsFromVolume(
     new Volume()
@@ -155,24 +194,7 @@ export const makeHotHandlers = <
     };
   });
   compiler.watch({}, (err, stats) => {
-    if (err) {
-      console.error(err);
-    } else if (stats) {
-      const info = stats.toJson(statsOptions);
-
-      // We know there is one child compilation
-      console.log(
-        `Compilation complete after ${
-          (info.children as [StatsCompilation])[0].time
-        }ms.`
-      );
-      info.warnings?.forEach((warning) => {
-        console.warn(warning);
-      });
-      info.errors?.forEach((error) => {
-        console.error(error);
-      });
-    }
+    effectiveOptions.onComplete(err, stats);
 
     compilationState.queuedInvocations.forEach((invocation) => {
       handleInvocation(invocation, getHandlers, err, stats);
@@ -222,6 +244,36 @@ export const makeHotHandlers = <
   };
 };
 
+export const defaultBuildOnComplete: BuildOptions["onComplete"] = (
+  err,
+  stats
+) => {
+  if (err) {
+    console.error(err.stack || err);
+    if ("details" in err) {
+      console.error((err as Error & { details: string }).details);
+    }
+    throw err;
+  }
+  if (!stats) {
+    throw new Error("missing stats");
+  }
+  const info = stats.toJson(statsOptions);
+  info.warnings?.forEach((warning) => {
+    console.warn(warning);
+  });
+  info.errors?.forEach((error) => {
+    console.error(error);
+  });
+  if (stats.hasErrors()) {
+    throw new Error("Failed to build due to errors");
+  }
+};
+
+const defaultBuildOptions: BuildOptions = {
+  onComplete: defaultBuildOnComplete,
+};
+
 /**
  * Make a handler from a prebuilt module
  * @param module
@@ -243,28 +295,14 @@ export const makeStaticHandlers = <
  * Build a static handler
  * @param env
  */
-export const buildHandler = async (config: Configuration): Promise<void> => {
+export const buildHandler = async (
+  config: Configuration,
+  options?: Partial<BuildOptions>
+): Promise<void> => {
+  const effectiveOptions: BuildOptions = {
+    ...defaultBuildOptions,
+    ...options,
+  };
   const compiler = webpack(config);
-  compiler.run((err, stats) => {
-    if (err) {
-      console.error(err.stack || err);
-      if ("details" in err) {
-        console.error((err as Error & { details: string }).details);
-      }
-      throw err;
-    }
-    if (!stats) {
-      throw new Error("missing stats");
-    }
-    const info = stats.toJson(statsOptions);
-    info.warnings?.forEach((warning) => {
-      console.warn(warning);
-    });
-    info.errors?.forEach((error) => {
-      console.error(error);
-    });
-    if (stats.hasErrors()) {
-      throw new Error("Failed to build due to errors");
-    }
-  });
+  compiler.run(effectiveOptions.onComplete);
 };
