@@ -115,6 +115,9 @@ const makeProxy = <Handlers extends Record<string, unknown>>(
       set() {
         throw new Error("You cannot assign to a webpack-cloud-functions proxy");
       },
+      ownKeys() {
+        return Reflect.ownKeys(getHandlers());
+      },
     }
   ) as unknown) as Handlers;
 
