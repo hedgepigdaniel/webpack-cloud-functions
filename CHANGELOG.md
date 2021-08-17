@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.4.0](https://github.com/hedgepigdaniel/webpack-cloud-functions/compare/v0.3.0...v0.4.0) (2021-08-17)
+
+
+### Features
+
+* implement ownKeys in proxy (for autocomplete) ([a5f7d83](https://github.com/hedgepigdaniel/webpack-cloud-functions/commit/a5f7d83863ffc71855a855557390a1bbba990c9b))
+
+
+
+
+
 # [0.3.0](https://github.com/hedgepigdaniel/webpack-cloud-functions/compare/v0.2.1...v0.3.0) (2021-08-16)
 
 

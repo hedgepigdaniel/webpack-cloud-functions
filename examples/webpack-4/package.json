@@ -1,7 +1,7 @@
 {
   "name": "webpack-cloud-functions-example-webpack-4",
   "description": "webpack-cloud-functions example for webpack 4",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "scripts": {
     "start": "ts-node -i -e 'const { hotHandlers } = require(\"./src/index\"); const proxy = hotHandlers.proxy;'"
   },
@@ -12,7 +12,7 @@
   "dependencies": {
     "ts-node": "^10.2.0",
     "webpack": "^4.46.0",
-    "webpack-cloud-functions": "^0.3.0"
+    "webpack-cloud-functions": "^0.4.0"
   },
   "private": true
 }
